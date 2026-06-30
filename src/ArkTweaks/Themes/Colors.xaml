@@ -61,6 +61,7 @@
     <Color x:Key="MutedTextColor">#7C8798</Color>
 
     <!-- Borders -->
+<<<<<<< HEAD
     <SolidColorBrush x:Key="BorderBrush" Color="#10FFFFFF" Opacity="0.06" />
     <Color x:Key="BorderColor">#10FFFFFF</Color>
 
@@ -75,5 +76,21 @@
     <!-- Pressed -->
     <SolidColorBrush x:Key="PressedBrush" Color="#10FFFFFF" Opacity="0.08" />
     <Color x:Key="PressedColor">#10FFFFFF</Color>
+=======
+    <SolidColorBrush x:Key="BorderBrush" Color="#0FFFFFF" Opacity="0.06" />
+    <Color x:Key="BorderColor">#0FFFFFF</Color>
+
+    <!-- Separators -->
+    <SolidColorBrush x:Key="SeparatorBrush" Color="#0FFFFFF" Opacity="0.04" />
+    <Color x:Key="SeparatorColor">#0FFFFFF</Color>
+
+    <!-- Hover -->
+    <SolidColorBrush x:Key="HoverBrush" Color="#0FFFFFF" Opacity="0.03" />
+    <Color x:Key="HoverColor">#0FFFFFF</Color>
+
+    <!-- Pressed -->
+    <SolidColorBrush x:Key="PressedBrush" Color="#0FFFFFF" Opacity="0.08" />
+    <Color x:Key="PressedColor">#0FFFFFF</Color>
+>>>>>>> 8084128e653daca56c14018f700dad85a7dc5c27
 
 </ResourceDictionary>

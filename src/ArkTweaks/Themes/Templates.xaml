@@ -160,6 +160,7 @@
         </Border>
     </ControlTemplate>
 
+<<<<<<< HEAD
     <!-- Title Bar Button Template -->
     <ControlTemplate x:Key="TitleBarButtonTemplate" TargetType="Button">
         <Border Background="{TemplateBinding Background}"
@@ -168,6 +169,8 @@
         </Border>
     </ControlTemplate>
 
+=======
+>>>>>>> 8084128e653daca56c14018f700dad85a7dc5c27
     <!-- Table Row Template -->
     <ControlTemplate x:Key="TableRowTemplate" TargetType="DataGridRow">
         <Border x:Name="Border"

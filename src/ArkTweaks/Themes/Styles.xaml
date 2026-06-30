@@ -57,6 +57,7 @@
         <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
     </Style>
 
+<<<<<<< HEAD
     <!-- Title Bar Button Style -->
     <Style x:Key="TitleBarButtonStyle" TargetType="Button">
         <Setter Property="Background" Value="Transparent"/>
@@ -73,6 +74,8 @@
         </Style.Triggers>
     </Style>
 
+=======
+>>>>>>> 8084128e653daca56c14018f700dad85a7dc5c27
     <!-- Card Style -->
     <Style x:Key="CardStyle" TargetType="Border">
         <Setter Property="Background" Value="{StaticResource CardBackground}" />
