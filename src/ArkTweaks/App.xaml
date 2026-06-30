@@ -4,7 +4,11 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="UI/Styles/AppStyles.xaml"/>
+                <ResourceDictionary Source="UI/Styles/Colors.xaml"/>
+                <ResourceDictionary Source="UI/Styles/Typography.xaml"/>
+                <ResourceDictionary Source="UI/Styles/Layout.xaml"/>
+                <ResourceDictionary Source="UI/Styles/Buttons.xaml"/>
+                <ResourceDictionary Source="UI/Styles/Cards.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -4,17 +4,20 @@ using System.Windows.Controls;
 using ArkTweaks.UI.Navigation;
 using ArkTweaks.UI.ViewModels;
 using ArkTweaks.UI.Views;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ArkTweaks;
 
 public partial class MainWindow : Window
 {
     private readonly NavigationService _navigationService;
+    private readonly IServiceProvider _serviceProvider;
 
-    public MainWindow(NavigationService navigationService)
+    public MainWindow(NavigationService navigationService, IServiceProvider serviceProvider)
     {
         InitializeComponent();
         _navigationService = navigationService;
+        _serviceProvider = serviceProvider;
         
         // Subscribe to navigation changes
         _navigationService.PageChanged += OnPageChanged;
@@ -54,6 +57,26 @@ public partial class MainWindow : Window
             PageType.About => new AboutPage(),
             _ => new DashboardPage()
         };
+
+        // Set DataContext with ViewModel
+        if (page != null)
+        {
+            object? viewModel = pageType switch
+            {
+                PageType.Dashboard => _serviceProvider.GetService<DashboardViewModel>(),
+                PageType.Optimize => _serviceProvider.GetService<OptimizeViewModel>(),
+                PageType.Cleanup => _serviceProvider.GetService<CleanupViewModel>(),
+                PageType.Startup => _serviceProvider.GetService<StartupViewModel>(),
+                PageType.Gaming => _serviceProvider.GetService<GamingViewModel>(),
+                PageType.Performance => _serviceProvider.GetService<PerformanceViewModel>(),
+                PageType.Restore => _serviceProvider.GetService<RestoreViewModel>(),
+                PageType.Settings => _serviceProvider.GetService<SettingsViewModel>(),
+                PageType.About => _serviceProvider.GetService<AboutViewModel>(),
+                _ => _serviceProvider.GetService<DashboardViewModel>()
+            };
+            
+            page.DataContext = viewModel;
+        }
 
         ContentArea.Content = page;
     }

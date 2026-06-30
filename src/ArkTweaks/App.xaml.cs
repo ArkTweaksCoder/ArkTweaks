@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using ArkTweaks.Services;
 using ArkTweaks.Core.Safety;
 using ArkTweaks.UI.Navigation;
+using ArkTweaks.UI.ViewModels;
 
 namespace ArkTweaks;
 
@@ -30,6 +31,9 @@ public partial class App : Application
             // Create and show main window
             var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
             mainWindow.Show();
+            
+            // Keep application running
+            ShutdownMode = ShutdownMode.OnMainWindowClose;
         }
         catch (Exception ex)
         {
@@ -56,6 +60,17 @@ public partial class App : Application
         services.AddSingleton<StartupService>();
         services.AddSingleton<RestorePointService>();
         services.AddSingleton<PowerPlanService>();
+
+        // ViewModels
+        services.AddTransient<DashboardViewModel>();
+        services.AddTransient<OptimizeViewModel>();
+        services.AddTransient<CleanupViewModel>();
+        services.AddTransient<StartupViewModel>();
+        services.AddTransient<GamingViewModel>();
+        services.AddTransient<PerformanceViewModel>();
+        services.AddTransient<RestoreViewModel>();
+        services.AddTransient<SettingsViewModel>();
+        services.AddTransient<AboutViewModel>();
 
         // Main Window
         services.AddTransient<MainWindow>();
