@@ -1,3 +1,5 @@
+using System;
+using System.Threading.Tasks;
 using ArkTweaks.Core.Safety;
 using ArkTweaks.Models;
 using Microsoft.Extensions.Logging;

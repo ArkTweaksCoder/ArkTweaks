@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 
 namespace ArkTweaks.Services;
@@ -55,6 +57,41 @@ public class PowerPlanService
         }
 
         return plans;
+    }
+
+    public Task<PowerPlan?> GetCurrentPowerPlanAsync()
+    {
+        return Task.FromResult(GetPowerPlans().FirstOrDefault(p => p.IsActive));
+    }
+
+    public async Task<bool> SetPowerPlanAsync(string planName)
+    {
+        var plans = GetPowerPlans();
+        var plan = plans.FirstOrDefault(p => p.Name.Equals(planName, StringComparison.OrdinalIgnoreCase));
+        
+        if (plan == null)
+        {
+            _logger.LogWarning("Power plan not found: {Name}", planName);
+            return false;
+        }
+
+        return await SetPowerPlanByGuidAsync(plan.Guid.ToString());
+    }
+
+    public async Task<bool> SetPowerPlanByGuidAsync(string guidString)
+    {
+        try
+        {
+            var guid = Guid.Parse(guidString);
+            SetPowerPlan(guid);
+            await Task.CompletedTask;
+            return true;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to set power plan by GUID");
+            return false;
+        }
     }
 
     public void SetPowerPlan(Guid planGuid)

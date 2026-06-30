@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.Win32;
 
@@ -55,6 +57,11 @@ public class StartupService
         return items;
     }
 
+    public Task<List<StartupItem>> GetStartupAppsAsync()
+    {
+        return Task.FromResult(GetStartupItems());
+    }
+
     public void DisableStartupItem(string name)
     {
         try
@@ -74,6 +81,22 @@ public class StartupService
         }
     }
 
+    public async Task<bool> DisableStartupAppAsync(string name, string path)
+    {
+        return await Task.Run(() =>
+        {
+            try
+            {
+                DisableStartupItem(name);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        });
+    }
+
     public void EnableStartupItem(string name, string path)
     {
         try
@@ -91,5 +114,21 @@ public class StartupService
             _logger.LogError(ex, "Failed to enable startup item: {Name}", name);
             throw;
         }
+    }
+
+    public async Task<bool> EnableStartupAppAsync(string name, string path)
+    {
+        return await Task.Run(() =>
+        {
+            try
+            {
+                EnableStartupItem(name, path);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        });
     }
 }

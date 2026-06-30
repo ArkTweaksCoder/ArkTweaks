@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Logging;
+using ArkTweaks.Core.Tweaks;
 
 namespace ArkTweaks.Core.Safety;
 
@@ -13,8 +14,8 @@ public class SafetyValidator
 
     public class ValidationResult
     {
-        public bool IsSafe { get; set; }
-        public string Message { get; set; } = string.Empty;
+        public bool IsValid { get; set; }
+        public string Reason { get; set; } = string.Empty;
         public RiskLevel RiskLevel { get; set; }
     }
 
@@ -26,8 +27,8 @@ public class SafetyValidator
             _logger.LogWarning("Blocked high-risk action: {Action}", actionName);
             return new ValidationResult
             {
-                IsSafe = false,
-                Message = $"Action '{actionName}' is blocked due to high risk level.",
+                IsValid = false,
+                Reason = $"Action '{actionName}' is blocked due to high risk level.",
                 RiskLevel = riskLevel
             };
         }
@@ -38,8 +39,8 @@ public class SafetyValidator
             _logger.LogInformation("Medium-risk action validated: {Action}", actionName);
             return new ValidationResult
             {
-                IsSafe = true,
-                Message = $"Action '{actionName}' requires caution. {description}",
+                IsValid = true,
+                Reason = $"Action '{actionName}' requires caution. {description}",
                 RiskLevel = riskLevel
             };
         }
@@ -48,8 +49,8 @@ public class SafetyValidator
         _logger.LogDebug("Low-risk action validated: {Action}", actionName);
         return new ValidationResult
         {
-            IsSafe = true,
-            Message = string.Empty,
+            IsValid = true,
+            Reason = string.Empty,
             RiskLevel = riskLevel
         };
     }
@@ -57,6 +58,11 @@ public class SafetyValidator
     public bool CanExecuteAction(string actionName, RiskLevel riskLevel)
     {
         var result = ValidateAction(actionName, riskLevel, string.Empty);
-        return result.IsSafe;
+        return result.IsValid;
+    }
+
+    public ValidationResult ValidateTweak(ITweak tweak)
+    {
+        return ValidateAction(tweak.Name, tweak.RiskLevel, tweak.Description);
     }
 }

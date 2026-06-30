@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 
 namespace ArkTweaks.Services;
@@ -11,6 +12,13 @@ public class TempCleanerService
     public TempCleanerService(ILogger<TempCleanerService> logger)
     {
         _logger = logger;
+    }
+
+    public class CleanupResult
+    {
+        public bool Success { get; set; }
+        public long SpaceFreed { get; set; }
+        public string? ErrorMessage { get; set; }
     }
 
     public long ScanTempFiles()
@@ -66,6 +74,34 @@ public class TempCleanerService
             _logger.LogError(ex, "Failed to clean temp files");
             throw;
         }
+    }
+
+    public async Task<CleanupResult> CleanupTempFilesAsync()
+    {
+        return await Task.Run(() =>
+        {
+            try
+            {
+                var sizeBefore = ScanTempFiles();
+                CleanTempFiles();
+                var sizeAfter = ScanTempFiles();
+                
+                return new CleanupResult
+                {
+                    Success = true,
+                    SpaceFreed = sizeBefore - sizeAfter
+                };
+            }
+            catch (Exception ex)
+            {
+                return new CleanupResult
+                {
+                    Success = false,
+                    SpaceFreed = 0,
+                    ErrorMessage = ex.Message
+                };
+            }
+        });
     }
 
     private long GetDirectorySize(string path)

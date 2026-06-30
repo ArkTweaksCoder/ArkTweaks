@@ -4,8 +4,16 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using ArkTweaks.Services;
 using ArkTweaks.Core.Safety;
+using ArkTweaks.Core.Logging;
+using ArkTweaks.Core.Restore;
+using ArkTweaks.Core.Engine;
+using ArkTweaks.Core.Tweaks;
 using ArkTweaks.UI.Navigation;
 using ArkTweaks.UI.ViewModels;
+using ArkTweaks.Tweaks.Storage;
+using ArkTweaks.Tweaks.Power;
+using ArkTweaks.Tweaks.Restore;
+using ArkTweaks.Tweaks.Startup;
 
 namespace ArkTweaks;
 
@@ -28,9 +36,22 @@ public partial class App : Application
             var licenseService = ServiceProvider.GetRequiredService<LicenseService>();
             licenseService.Initialize();
 
-        // Create and show main window
-        var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
-        mainWindow.Show();
+            // Initialize optimization engine with tweaks
+            var optimizationEngine = ServiceProvider.GetRequiredService<OptimizationEngine>();
+            optimizationEngine.RegisterTweak(ServiceProvider.GetRequiredService<TemporaryFilesCleanupTweak>());
+            optimizationEngine.RegisterTweak(ServiceProvider.GetRequiredService<RecycleBinCleanupTweak>());
+            optimizationEngine.RegisterTweak(ServiceProvider.GetRequiredService<HighPerformancePowerPlanTweak>());
+            optimizationEngine.RegisterTweak(ServiceProvider.GetRequiredService<CreateRestorePointTweak>());
+
+            // Create and show main window
+            var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
+            mainWindow.Show();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Error starting application: {ex.Message}\n\n{ex.StackTrace}", "Startup Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            Shutdown();
+        }
     }
 
     private void ConfigureServices(IServiceCollection services)
@@ -41,6 +62,9 @@ public partial class App : Application
         // Core Services
         services.AddSingleton<LicenseService>();
         services.AddSingleton<SafetyValidator>();
+        services.AddSingleton<ActionLogger>();
+        services.AddSingleton<BackupService>();
+        services.AddSingleton<OptimizationEngine>();
 
         // Navigation
         services.AddSingleton<NavigationService>();
@@ -51,6 +75,12 @@ public partial class App : Application
         services.AddSingleton<StartupService>();
         services.AddSingleton<RestorePointService>();
         services.AddSingleton<PowerPlanService>();
+
+        // Tweaks
+        services.AddSingleton<TemporaryFilesCleanupTweak>();
+        services.AddSingleton<RecycleBinCleanupTweak>();
+        services.AddSingleton<HighPerformancePowerPlanTweak>();
+        services.AddSingleton<CreateRestorePointTweak>();
 
         // ViewModels
         services.AddTransient<DashboardViewModel>();

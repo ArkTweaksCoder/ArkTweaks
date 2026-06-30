@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ArkTweaks.Core.Logging;
 using ArkTweaks.Core.Safety;
 using ArkTweaks.Core.Tweaks;
 using ArkTweaks.Models;
@@ -44,7 +45,7 @@ public class OptimizationEngine
 
     public IReadOnlyList<ITweak> GetAvailableTweaks()
     {
-        var currentLicense = _licenseService.GetCurrentLicenseTier();
+        var currentLicense = _licenseService.CurrentLicense.Tier;
         
         return _tweaks
             .Where(t => t.RequiredLicenseTier <= currentLicense)
@@ -81,7 +82,7 @@ public class OptimizationEngine
         }
 
         // License check
-        var currentLicense = _licenseService.GetCurrentLicenseTier();
+        var currentLicense = _licenseService.CurrentLicense.Tier;
         if (tweak.RequiredLicenseTier > currentLicense)
         {
             return new TweakResult
