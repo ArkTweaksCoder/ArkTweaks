@@ -78,6 +78,17 @@ public partial class App : Application
         services.AddSingleton<RecommendationEngine>();
         services.AddSingleton<HealthScoreService>();
 
+        // Cleanup Services
+        services.AddSingleton<CleanupScannerService>();
+        services.AddSingleton<CleanupHistoryService>();
+
+        // Performance History Services
+        services.AddSingleton<PerformanceHistoryService>();
+
+        // Recommendation Services
+        services.AddSingleton<RecommendationExecutionService>();
+        services.AddSingleton<RecommendationHistoryService>();
+
         // Settings Service
         services.AddSingleton<SettingsService>();
 
@@ -105,6 +116,8 @@ public partial class App : Application
         services.AddTransient<GamingViewModel>();
         services.AddTransient<PerformanceViewModel>();
         services.AddTransient<RestoreViewModel>();
+        services.AddTransient<HistoryViewModel>();
+        services.AddTransient<LogsViewModel>();
         services.AddTransient<SettingsViewModel>();
         services.AddTransient<AboutViewModel>();
 
