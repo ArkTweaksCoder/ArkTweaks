@@ -17,17 +17,25 @@ public partial class App : Application
     {
         base.OnStartup(e);
 
-        var services = new ServiceCollection();
-        ConfigureServices(services);
-        ServiceProvider = services.BuildServiceProvider();
+        try
+        {
+            var services = new ServiceCollection();
+            ConfigureServices(services);
+            ServiceProvider = services.BuildServiceProvider();
 
-        // Initialize license service
-        var licenseService = ServiceProvider.GetRequiredService<LicenseService>();
-        licenseService.Initialize();
+            // Initialize license service
+            var licenseService = ServiceProvider.GetRequiredService<LicenseService>();
+            licenseService.Initialize();
 
-        // Create and show main window
-        var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
-        mainWindow.Show();
+            // Create and show main window
+            var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
+            mainWindow.Show();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Error starting application: {ex.Message}\n\n{ex.StackTrace}", "Startup Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            Shutdown();
+        }
     }
 
     private void ConfigureServices(IServiceCollection services)
