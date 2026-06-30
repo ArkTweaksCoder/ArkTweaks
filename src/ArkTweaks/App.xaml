@@ -4,6 +4,13 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <!-- New Theme Resources -->
+                <ResourceDictionary Source="Themes/Colors.xaml"/>
+                <ResourceDictionary Source="Themes/Styles.xaml"/>
+                <ResourceDictionary Source="Themes/Templates.xaml"/>
+                <ResourceDictionary Source="Themes/Animations.xaml"/>
+                <ResourceDictionary Source="Themes/Icons.xaml"/>
+                <!-- Legacy Resources (will be phased out) -->
                 <ResourceDictionary Source="UI/Styles/Colors.xaml"/>
                 <ResourceDictionary Source="UI/Styles/Typography.xaml"/>
                 <ResourceDictionary Source="UI/Styles/Layout.xaml"/>

@@ -9,6 +9,8 @@ public enum PageType
     Gaming,
     Performance,
     Restore,
+    History,
+    Logs,
     Settings,
     About
 }

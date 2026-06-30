@@ -1,0 +1,79 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!-- Navigation Icons -->
+    <sys:String x:Key="IconDashboard">🏠</sys:String>
+    <sys:String x:Key="IconOptimize">⚡</sys:String>
+    <sys:String x:Key="IconCleanup">🧹</sys:String>
+    <sys:String x:Key="IconStartup">🚀</sys:String>
+    <sys:String x:Key="IconGaming">🎮</sys:String>
+    <sys:String x:Key="IconPerformance">📊</sys:String>
+    <sys:String x:Key="IconRestore">🔁</sys:String>
+    <sys:String x:Key="IconHistory">📋</sys:String>
+    <sys:String x:Key="IconLogs">📝</sys:String>
+    <sys:String x:Key="IconSettings">⚙️</sys:String>
+    <sys:String x:Key="IconAbout">ℹ️</sys:String>
+
+    <!-- Action Icons -->
+    <sys:String x:Key="IconClose">✕</sys:String>
+    <sys:String x:Key="IconMinimize">−</sys:String>
+    <sys:String x:Key="IconMaximize">□</sys:String>
+    <sys:String x:Key="IconRestoreWindow">🔲</sys:String>
+    <sys:String x:Key="IconCheck">✓</sys:String>
+    <sys:String x:Key="IconWarning">⚠️</sys:String>
+    <sys:String x:Key="IconError">✕</sys:String>
+    <sys:String x:Key="IconSuccess">✓</sys:String>
+    <sys:String x:Key="IconInfo">ℹ️</sys:String>
+
+    <!-- System Icons -->
+    <sys:String x:Key="IconCpu">💻</sys:String>
+    <sys:String x:Key="IconRam">🧠</sys:String>
+    <sys:String x:Key="IconDisk">💾</sys:String>
+    <sys:String x:Key="IconNetwork">🌐</sys:String>
+    <sys:String x:Key="IconTemperature">🌡️</sys:String>
+    <sys:String x:Key="IconBattery">🔋</sys:String>
+    <sys:String x:Key="IconWifi">📶</sys:String>
+    <sys:String x:Key="IconBluetooth">🔵</sys:String>
+
+    <!-- File Icons -->
+    <sys:String x:Key="IconFile">📄</sys:String>
+    <sys:String x:Key="IconFolder">📁</sys:String>
+    <sys:String x:Key="IconTrash">🗑️</sys:String>
+    <sys:String x:Key="IconDownload">⬇️</sys:String>
+    <sys:String x:Key="IconUpload">⬆️</sys:String>
+    <sys:String x:Key="IconSearch">🔍</sys:String>
+    <sys:String x:Key="IconFilter">🔽</sys:String>
+    <sys:String x:Key="IconSort">🔼</sys:String>
+
+    <!-- Utility Icons -->
+    <sys:String x:Key="IconEdit">✏️</sys:String>
+    <sys:String x:Key="IconCopy">📋</sys:String>
+    <sys:String x:Key="IconPaste">📋</sys:String>
+    <sys:String x:Key="IconCut">✂️</sys:String>
+    <sys:String x:Key="IconUndo">↩️</sys:String>
+    <sys:String x:Key="IconRedo">↪️</sys:String>
+    <sys:String x:Key="IconRefresh">🔄</sys:String>
+    <sys:String x:Key="IconSync">🔄</sys:String>
+
+    <!-- Status Icons -->
+    <sys:String x:Key="IconOnline">🟢</sys:String>
+    <sys:String x:Key="IconOffline">🔴</sys:String>
+    <sys:String x:Key="IconBusy">🟡</sys:String>
+    <sys:String x:Key="IconAway">🟠</sys:String>
+
+    <!-- Category Icons -->
+    <sys:String x:Key="IconLicense">🔑</sys:String>
+    <sys:String x:Key="IconGeneral">🎛️</sys:String>
+    <sys:String x:Key="IconNotifications">🔔</sys:String>
+    <sys:String x:Key="IconPrivacy">🔒</sys:String>
+    <sys:String x:Key="IconSecurity">🛡️</sys:String>
+    <sys:String x:Key="IconAppearance">🎨</sys:String>
+
+    <!-- Gaming Icons -->
+    <sys:String x:Key="IconGamepad">🎮</sys:String>
+    <sys:String x:Key="IconTrophy">🏆</sys:String>
+    <sys:String x:Key="IconStar">⭐</sys:String>
+    <sys:String x:Key="IconHeart">❤️</sys:String>
+
+</ResourceDictionary>

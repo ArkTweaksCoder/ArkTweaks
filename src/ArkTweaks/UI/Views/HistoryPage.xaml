@@ -1,0 +1,113 @@
+<UserControl x:Class="ArkTweaks.UI.Views.HistoryPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,24">
+            <TextBlock Text="History" 
+                       Style="{StaticResource TitleTextStyle}"
+                       Margin="0,0,0,8"/>
+            <TextBlock Text="View your optimization and cleanup history" 
+                       Style="{StaticResource NormalTextStyle}"
+                       Foreground="{StaticResource SecondaryTextBrush}"/>
+        </StackPanel>
+
+        <!-- Main Content -->
+        <Border Grid.Row="1" Style="{StaticResource CardStyle}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Toolbar -->
+                <Grid Grid.Row="0" Margin="0,0,0,16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Orientation="Horizontal">
+                        <TextBox Width="250"
+                                 Style="{StaticResource ModernTextBoxStyle}"
+                                 Padding="12,10"
+                                 FontSize="13"
+                                 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                        <Button Content="Export"
+                                Style="{StaticResource SecondaryButtonStyle}"
+                                Command="{Binding ExportCommand}"
+                                Margin="0,0,8,0"
+                                Padding="16,8"
+                                FontSize="13"/>
+
+                        <Button Content="Clear History"
+                                Style="{StaticResource DangerButtonStyle}"
+                                Command="{Binding ClearHistoryCommand}"
+                                Padding="16,8"
+                                FontSize="13"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- History List -->
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding HistoryItems}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="{StaticResource ElevatedCardBackground}"
+                                        CornerRadius="8"
+                                        Padding="16"
+                                        Margin="0,0,0,8">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Grid.Column="0"
+                                                   Text="{Binding Icon}"
+                                                   FontSize="16"
+                                                   Margin="0,0,16,0"/>
+
+                                        <StackPanel Grid.Column="1">
+                                            <TextBlock Text="{Binding Action}" 
+                                                       Style="{StaticResource NormalTextStyle}"
+                                                       FontSize="14"
+                                                       FontWeight="Medium"/>
+                                            <TextBlock Text="{Binding Details}" 
+                                                       Style="{StaticResource SmallLabelTextStyle}"
+                                                       Foreground="{StaticResource MutedTextBrush}"
+                                                       Margin="0,2,0,0"/>
+                                        </StackPanel>
+
+                                        <TextBlock Grid.Column="2"
+                                                   Text="{Binding Timestamp}"
+                                                   Style="{StaticResource SmallLabelTextStyle}"
+                                                   Foreground="{StaticResource SecondaryTextBrush}"
+                                                   VerticalAlignment="Center"
+                                                   Margin="0,0,16,0"/>
+
+                                        <TextBlock Grid.Column="3"
+                                                   Text="{Binding Status}"
+                                                   Style="{StaticResource SmallLabelTextStyle}"
+                                                   Foreground="{StaticResource SuccessBrush}"
+                                                   VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

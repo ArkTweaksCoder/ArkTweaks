@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Microsoft.Extensions.Logging;
 using ArkTweaks.Services;
 using ArkTweaks.Core;
@@ -40,6 +41,14 @@ public class DashboardViewModel : BaseViewModel
     private double _ramInstalledGB = 0;
     private double _freeDiskSpaceGB = 0;
     private double _windowsUptimeHours = 0;
+
+    // New UI Properties
+    private string _healthScoreDisplay = "85";
+    private string _healthStatus = "Good";
+    private string _diskUsage = "58%";
+    private string _healthTrend = "+5%";
+    private string _cleanupTrend = "+12%";
+    private string _storageTrend = "-2%";
 
     public string CpuUsage
     {
@@ -126,9 +135,52 @@ public class DashboardViewModel : BaseViewModel
         set => SetProperty(ref _windowsUptimeHours, value);
     }
 
+    // New UI Properties
+    public string HealthScoreDisplay
+    {
+        get => _healthScoreDisplay;
+        set => SetProperty(ref _healthScoreDisplay, value);
+    }
+
+    public string HealthStatus
+    {
+        get => _healthStatus;
+        set => SetProperty(ref _healthStatus, value);
+    }
+
+    public string DiskUsage
+    {
+        get => _diskUsage;
+        set => SetProperty(ref _diskUsage, value);
+    }
+
+    public string HealthTrend
+    {
+        get => _healthTrend;
+        set => SetProperty(ref _healthTrend, value);
+    }
+
+    public string CleanupTrend
+    {
+        get => _cleanupTrend;
+        set => SetProperty(ref _cleanupTrend, value);
+    }
+
+    public string StorageTrend
+    {
+        get => _storageTrend;
+        set => SetProperty(ref _storageTrend, value);
+    }
+
     // Collections
     public ObservableCollection<RecentActivityItem> RecentActivities { get; } = new();
     public ObservableCollection<Recommendation> Recommendations { get; } = new();
+
+    // Commands
+    public ICommand? OptimizeCommand { get; }
+    public ICommand? CleanupCommand { get; }
+    public ICommand? RefreshCommand { get; }
+    public ICommand? RestorePointCommand { get; }
 
     public DashboardViewModel(
         ILogger<DashboardViewModel> logger,
@@ -150,6 +202,12 @@ public class DashboardViewModel : BaseViewModel
         _healthScoreService = healthScoreService;
         _optimizationEngine = optimizationEngine;
         _actionLogger = actionLogger;
+        
+        // Initialize commands
+        OptimizeCommand = new RelayCommand(async () => await QuickOptimizeAsync());
+        CleanupCommand = new RelayCommand(async () => await QuickCleanAsync());
+        RefreshCommand = new RelayCommand(async () => await PerformFullScanAsync());
+        RestorePointCommand = new RelayCommand(async () => await CreateRestorePointAsync());
         
         LoadSystemInfo();
         LoadRecentActivities();
