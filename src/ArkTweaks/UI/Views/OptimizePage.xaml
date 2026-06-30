@@ -4,25 +4,29 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel>
             <TextBlock Text="Optimize" 
-                       FontSize="{StaticResource FontSizeXXLarge}" 
-                       FontWeight="{StaticResource FontWeightBold}"
-                       Foreground="{StaticResource TextPrimaryBrush}"
-                       Margin="0,0,0,{StaticResource SpacingL}"/>
+                       FontSize="32" 
+                       FontWeight="Bold"
+                       Foreground="#FFFFFF"
+                       Margin="0,0,0,20"/>
 
-            <Border Style="{StaticResource CardStyle}">
+            <Border Background="#252526"
+                    BorderBrush="#3E3E42"
+                    BorderThickness="1"
+                    CornerRadius="8"
+                    Padding="16">
                 <StackPanel>
                     <TextBlock Text="System Optimization" 
-                               FontSize="{StaticResource FontSizeLarge}" 
-                               FontWeight="{StaticResource FontWeightSemiBold}"
-                               Foreground="{StaticResource TextPrimaryBrush}"/>
+                               FontSize="20" 
+                               FontWeight="SemiBold"
+                               Foreground="#FFFFFF"/>
                     <TextBlock Text="Advanced optimization features will be available in future updates." 
-                               FontSize="{StaticResource FontSizeNormal}" 
-                               Foreground="{StaticResource TextSecondaryBrush}"
-                               Margin="0,{StaticResource SpacingS},0,0"/>
+                               FontSize="14" 
+                               Foreground="#CCCCCC"
+                               Margin="0,8,0,0"/>
                     <TextBlock Text="Current version includes basic cleanup and startup management." 
-                               FontSize="{StaticResource FontSizeSmall}" 
-                               Foreground="{StaticResource TextMutedBrush}"
-                               Margin="0,{StaticResource SpacingXS},0,0"/>
+                               FontSize="12" 
+                               Foreground="#888888"
+                       Margin="0,4,0,0"/>
                 </StackPanel>
             </Border>
         </StackPanel>

@@ -4,18 +4,23 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel>
             <TextBlock Text="Dashboard" 
-                       FontSize="{StaticResource FontSizeXXLarge}" 
-                       FontWeight="{StaticResource FontWeightBold}"
-                       Foreground="{StaticResource TextPrimaryBrush}"
-                       Margin="0,0,0,{StaticResource SpacingL}"/>
+                       FontSize="32" 
+                       FontWeight="Bold"
+                       Foreground="#FFFFFF"
+                       Margin="0,0,0,20"/>
 
             <TextBlock Text="System Overview" 
-                       FontSize="{StaticResource FontSizeLarge}" 
-                       FontWeight="{StaticResource FontWeightSemiBold}"
-                       Foreground="{StaticResource TextSecondaryBrush}"
-                       Margin="0,0,0,{StaticResource SpacingM}"/>
+                       FontSize="20" 
+                       FontWeight="SemiBold"
+                       Foreground="#CCCCCC"
+                       Margin="0,0,0,16"/>
 
-            <Border Style="{StaticResource CardStyle}" Margin="0,0,0,{StaticResource SpacingM}">
+            <Border Background="#252526"
+                    BorderBrush="#3E3E42"
+                    BorderThickness="1"
+                    CornerRadius="8"
+                    Padding="16"
+                    Margin="0,0,0,16">
                 <StackPanel>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -24,57 +29,61 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <StackPanel Grid.Column="0" Margin="{StaticResource SpacingS}">
+                        <StackPanel Grid.Column="0" Margin="8">
                             <TextBlock Text="CPU Usage" 
-                                       FontSize="{StaticResource FontSizeSmall}" 
-                                       Foreground="{StaticResource TextSecondaryBrush}"/>
+                                       FontSize="12" 
+                                       Foreground="#CCCCCC"/>
                             <TextBlock Text="45%" 
-                                       FontSize="{StaticResource FontSizeXLarge}" 
-                                       FontWeight="{StaticResource FontWeightSemiBold}"
-                                       Foreground="{StaticResource AccentBrush}"
-                                       Margin="0,{StaticResource SpacingXS},0,0"/>
+                                       FontSize="24" 
+                                       FontWeight="SemiBold"
+                                       Foreground="#007ACC"
+                                       Margin="0,4,0,0"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Column="1" Margin="{StaticResource SpacingS}">
+                        <StackPanel Grid.Column="1" Margin="8">
                             <TextBlock Text="RAM Usage" 
-                                       FontSize="{StaticResource FontSizeSmall}" 
-                                       Foreground="{StaticResource TextSecondaryBrush}"/>
+                                       FontSize="12" 
+                                       Foreground="#CCCCCC"/>
                             <TextBlock Text="62%" 
-                                       FontSize="{StaticResource FontSizeXLarge}" 
-                                       FontWeight="{StaticResource FontWeightSemiBold}"
-                                       Foreground="{StaticResource AccentBrush}"
-                                       Margin="0,{StaticResource SpacingXS},0,0"/>
+                                       FontSize="24" 
+                                       FontWeight="SemiBold"
+                                       Foreground="#007ACC"
+                                       Margin="0,4,0,0"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Column="2" Margin="{StaticResource SpacingS}">
+                        <StackPanel Grid.Column="2" Margin="8">
                             <TextBlock Text="Storage" 
-                                       FontSize="{StaticResource FontSizeSmall}" 
-                                       Foreground="{StaticResource TextSecondaryBrush}"/>
+                                       FontSize="12" 
+                                       Foreground="#CCCCCC"/>
                             <TextBlock Text="58%" 
-                                       FontSize="{StaticResource FontSizeXLarge}" 
-                                       FontWeight="{StaticResource FontWeightSemiBold}"
-                                       Foreground="{StaticResource AccentBrush}"
-                                       Margin="0,{StaticResource SpacingXS},0,0"/>
+                                       FontSize="24" 
+                                       FontWeight="SemiBold"
+                                       Foreground="#007ACC"
+                                       Margin="0,4,0,0"/>
                         </StackPanel>
                     </Grid>
                 </StackPanel>
             </Border>
 
-            <Border Style="{StaticResource CardStyle}">
+            <Border Background="#252526"
+                    BorderBrush="#3E3E42"
+                    BorderThickness="1"
+                    CornerRadius="8"
+                    Padding="16">
                 <StackPanel>
                     <TextBlock Text="Optimization Score" 
-                               FontSize="{StaticResource FontSizeMedium}" 
-                               FontWeight="{StaticResource FontWeightSemiBold}"
-                               Foreground="{StaticResource TextPrimaryBrush}"/>
+                               FontSize="16" 
+                               FontWeight="SemiBold"
+                               Foreground="#FFFFFF"/>
                     <TextBlock Text="85/100" 
-                               FontSize="{StaticResource FontSizeHuge}" 
-                               FontWeight="{StaticResource FontWeightBold}"
-                               Foreground="{StaticResource SuccessBrush}"
-                               Margin="0,{StaticResource SpacingS},0,0"/>
+                               FontSize="48" 
+                               FontWeight="Bold"
+                               Foreground="#4CAF50"
+                               Margin="0,8,0,0"/>
                     <TextBlock Text="Your system is running well" 
-                               FontSize="{StaticResource FontSizeSmall}" 
-                               Foreground="{StaticResource TextSecondaryBrush}"
-                               Margin="0,{StaticResource SpacingXS},0,0"/>
+                               FontSize="12" 
+                               Foreground="#CCCCCC"
+                               Margin="0,4,0,0"/>
                 </StackPanel>
             </Border>
         </StackPanel>

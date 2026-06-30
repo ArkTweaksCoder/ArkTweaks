@@ -4,47 +4,62 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel>
             <TextBlock Text="Cleanup" 
-                       FontSize="{StaticResource FontSizeXXLarge}" 
-                       FontWeight="{StaticResource FontWeightBold}"
-                       Foreground="{StaticResource TextPrimaryBrush}"
-                       Margin="0,0,0,{StaticResource SpacingL}"/>
+                       FontSize="32" 
+                       FontWeight="Bold"
+                       Foreground="#FFFFFF"
+                       Margin="0,0,0,20"/>
 
-            <Border Style="{StaticResource CardStyle}" Margin="0,0,0,{StaticResource SpacingM}">
+            <Border Background="#252526"
+                    BorderBrush="#3E3E42"
+                    BorderThickness="1"
+                    CornerRadius="8"
+                    Padding="16"
+                    Margin="0,0,0,16">
                 <StackPanel>
                     <TextBlock Text="Temporary Files" 
-                               FontSize="{StaticResource FontSizeLarge}" 
-                               FontWeight="{StaticResource FontWeightSemiBold}"
-                               Foreground="{StaticResource TextPrimaryBrush}"/>
+                               FontSize="20" 
+                               FontWeight="SemiBold"
+                               Foreground="#FFFFFF"/>
                     <TextBlock Text="Clean up temporary files to free disk space." 
-                               FontSize="{StaticResource FontSizeNormal}" 
-                               Foreground="{StaticResource TextSecondaryBrush}"
-                               Margin="0,{StaticResource SpacingS},0,0"/>
+                               FontSize="14" 
+                               Foreground="#CCCCCC"
+                               Margin="0,8,0,0"/>
                     <Button Content="Scan Temp Files" 
-                            Style="{StaticResource PrimaryButton}" 
+                            Background="#007ACC"
+                            Foreground="#FFFFFF"
+                            BorderThickness="0"
+                            Padding="12,8"
                             HorizontalAlignment="Left"
-                            Margin="0,{StaticResource SpacingM},0,0"/>
+                            Margin="0,16,0,0"/>
                 </StackPanel>
             </Border>
 
-            <Border Style="{StaticResource CardStyle}">
+            <Border Background="#252526"
+                    BorderBrush="#3E3E42"
+                    BorderThickness="1"
+                    CornerRadius="8"
+                    Padding="16">
                 <StackPanel>
                     <TextBlock Text="Recycle Bin" 
-                               FontSize="{StaticResource FontSizeLarge}" 
-                               FontWeight="{StaticResource FontWeightSemiBold}"
-                               Foreground="{StaticResource TextPrimaryBrush}"/>
+                               FontSize="20" 
+                               FontWeight="SemiBold"
+                               Foreground="#FFFFFF"/>
                     <TextBlock Text="Empty recycle bin (Standard tier feature)" 
-                               FontSize="{StaticResource FontSizeNormal}" 
-                               Foreground="{StaticResource TextSecondaryBrush}"
-                               Margin="0,{StaticResource SpacingS},0,0"/>
+                               FontSize="14" 
+                               Foreground="#CCCCCC"
+                               Margin="0,8,0,0"/>
                     <Button Content="Empty Recycle Bin" 
-                            Style="{StaticResource SecondaryButton}" 
+                            Background="#3E3E42"
+                            Foreground="#FFFFFF"
+                            BorderThickness="0"
+                            Padding="12,8"
                             HorizontalAlignment="Left"
                             IsEnabled="False"
-                            Margin="0,{StaticResource SpacingM},0,0"/>
+                            Margin="0,16,0,0"/>
                     <TextBlock Text="⚠️ Requires Standard license" 
-                               FontSize="{StaticResource FontSizeSmall}" 
-                               Foreground="{StaticResource WarningBrush}"
-                               Margin="0,{StaticResource SpacingXS},0,0"/>
+                               FontSize="12" 
+                               Foreground="#FF9800"
+                               Margin="0,4,0,0"/>
                 </StackPanel>
             </Border>
         </StackPanel>
