@@ -1,0 +1,54 @@
+<UserControl x:Class="ArkTweaks.UI.Views.AboutPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock Text="About" 
+                       FontSize="{StaticResource FontSizeXXLarge}" 
+                       FontWeight="{StaticResource FontWeightBold}"
+                       Foreground="{StaticResource TextPrimaryBrush}"
+                       Margin="0,0,0,{StaticResource SpacingL}"/>
+
+            <Border Style="{StaticResource CardStyle}">
+                <StackPanel>
+                    <TextBlock Text="🧠 Ark Tweaks" 
+                               FontSize="{StaticResource FontSizeHuge}" 
+                               FontWeight="{StaticResource FontWeightBold}"
+                               Foreground="{StaticResource AccentBrush}"
+                               Margin="0,0,0,{StaticResource SpacingS}"/>
+                    <TextBlock Text="Version 1.0.0" 
+                               FontSize="{StaticResource FontSizeLarge}" 
+                               FontWeight="{StaticResource FontWeightSemiBold}"
+                               Foreground="{StaticResource TextPrimaryBrush}"
+                               Margin="0,0,0,{StaticResource SpacingM}"/>
+                    <TextBlock Text="A Windows optimization tool built for gamers and performance-focused users." 
+                               FontSize="{StaticResource FontSizeNormal}" 
+                               Foreground="{StaticResource TextSecondaryBrush}"
+                               Margin="0,0,0,{StaticResource SpacingS}"
+                               TextWrapping="Wrap"/>
+                    <TextBlock Text="Features:" 
+                               FontSize="{StaticResource FontSizeMedium}" 
+                               FontWeight="{StaticResource FontWeightSemiBold}"
+                               Foreground="{StaticResource TextPrimaryBrush}"
+                               Margin="0,0,0,{StaticResource SpacingS}"/>
+                    <TextBlock Text="• Safe, transparent system optimizations" 
+                               FontSize="{StaticResource FontSizeSmall}" 
+                               Foreground="{StaticResource TextSecondaryBrush}"
+                               Margin="0,{StaticResource SpacingXS},0,0"/>
+                    <TextBlock Text="• Reversible tweaks with restore points" 
+                               FontSize="{StaticResource FontSizeSmall}" 
+                               Foreground="{StaticResource TextSecondaryBrush}"
+                               Margin="0,{StaticResource SpacingXS},0,0"/>
+                    <TextBlock Text="• License-based feature access" 
+                               FontSize="{StaticResource FontSizeSmall}" 
+                               Foreground="{StaticResource TextSecondaryBrush}"
+                               Margin="0,{StaticResource SpacingXS},0,0"/>
+                    <TextBlock Text="• Modern dark UI" 
+                               FontSize="{StaticResource FontSizeSmall}" 
+                               Foreground="{StaticResource TextSecondaryBrush}"
+                               Margin="0,{StaticResource SpacingXS},0,0"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

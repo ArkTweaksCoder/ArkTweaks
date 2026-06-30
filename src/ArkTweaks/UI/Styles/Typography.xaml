@@ -1,0 +1,25 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:System="clr-namespace:System;assembly=mscorlib">
+
+    <!-- Font Families -->
+    <FontFamily x:Key="PrimaryFont">Segoe UI Variable</FontFamily>
+    <FontFamily x:Key="SecondaryFont">Inter</FontFamily>
+
+    <!-- Font Sizes -->
+    <System:Double x:Key="FontSizeSmall">11</System:Double>
+    <System:Double x:Key="FontSizeNormal">13</System:Double>
+    <System:Double x:Key="FontSizeMedium">14</System:Double>
+    <System:Double x:Key="FontSizeLarge">16</System:Double>
+    <System:Double x:Key="FontSizeXLarge">20</System:Double>
+    <System:Double x:Key="FontSizeXXLarge">24</System:Double>
+    <System:Double x:Key="FontSizeHuge">32</System:Double>
+
+    <!-- Font Weights -->
+    <FontWeight x:Key="FontWeightLight">Light</FontWeight>
+    <FontWeight x:Key="FontWeightRegular">Regular</FontWeight>
+    <FontWeight x:Key="FontWeightMedium">Medium</FontWeight>
+    <FontWeight x:Key="FontWeightSemiBold">SemiBold</FontWeight>
+    <FontWeight x:Key="FontWeightBold">Bold</FontWeight>
+
+</ResourceDictionary>

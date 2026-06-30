@@ -1,0 +1,141 @@
+<Window x:Class="ArkTweaks.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="clr-namespace:ArkTweaks.UI.Navigation"
+        Title="Ark Tweaks" 
+        Height="700" 
+        Width="1200"
+        MinHeight="600"
+        MinWidth="1000"
+        Background="{StaticResource BackgroundBrush}"
+        WindowStartupLocation="CenterScreen">
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="{StaticResource SidebarWidth}"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Sidebar -->
+        <Border Grid.Column="0" 
+                Background="{StaticResource SidebarBrush}"
+                BorderBrush="{StaticResource BorderBrush}"
+                BorderThickness="0,0,1,0">
+            <StackPanel Margin="{StaticResource SpacingL}">
+                <!-- Logo -->
+                <TextBlock Text="🧠 Ark Tweaks"
+                           FontSize="{StaticResource FontSizeXLarge}"
+                           FontWeight="{StaticResource FontWeightBold}"
+                           Foreground="{StaticResource TextPrimaryBrush}"
+                           Margin="0,0,0,{StaticResource SpacingXL}"/>
+
+                <!-- Navigation Items -->
+                <Button Style="{StaticResource SecondaryButton}"
+                        HorizontalAlignment="Stretch"
+                        Margin="0,0,0,{StaticResource SpacingS}"
+                        Tag="Dashboard"
+                        Click="OnNavButtonClick">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="📊" Margin="0,0,12,0"/>
+                        <TextBlock Text="Dashboard"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Style="{StaticResource SecondaryButton}"
+                        HorizontalAlignment="Stretch"
+                        Margin="0,0,0,{StaticResource SpacingS}"
+                        Tag="Optimize"
+                        Click="OnNavButtonClick">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="⚡" Margin="0,0,12,0"/>
+                        <TextBlock Text="Optimize"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Style="{StaticResource SecondaryButton}"
+                        HorizontalAlignment="Stretch"
+                        Margin="0,0,0,{StaticResource SpacingS}"
+                        Tag="Cleanup"
+                        Click="OnNavButtonClick">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="🧹" Margin="0,0,12,0"/>
+                        <TextBlock Text="Cleanup"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Style="{StaticResource SecondaryButton}"
+                        HorizontalAlignment="Stretch"
+                        Margin="0,0,0,{StaticResource SpacingS}"
+                        Tag="Startup"
+                        Click="OnNavButtonClick">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="🚀" Margin="0,0,12,0"/>
+                        <TextBlock Text="Startup"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Style="{StaticResource SecondaryButton}"
+                        HorizontalAlignment="Stretch"
+                        Margin="0,0,0,{StaticResource SpacingS}"
+                        Tag="Gaming"
+                        Click="OnNavButtonClick">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="🎮" Margin="0,0,12,0"/>
+                        <TextBlock Text="Gaming"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Style="{StaticResource SecondaryButton}"
+                        HorizontalAlignment="Stretch"
+                        Margin="0,0,0,{StaticResource SpacingS}"
+                        Tag="Performance"
+                        Click="OnNavButtonClick">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="📈" Margin="0,0,12,0"/>
+                        <TextBlock Text="Performance"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Style="{StaticResource SecondaryButton}"
+                        HorizontalAlignment="Stretch"
+                        Margin="0,0,0,{StaticResource SpacingS}"
+                        Tag="Restore"
+                        Click="OnNavButtonClick">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="🔁" Margin="0,0,12,0"/>
+                        <TextBlock Text="Restore"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Style="{StaticResource SecondaryButton}"
+                        HorizontalAlignment="Stretch"
+                        Margin="0,0,0,{StaticResource SpacingS}"
+                        Tag="Settings"
+                        Click="OnNavButtonClick">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="⚙️" Margin="0,0,12,0"/>
+                        <TextBlock Text="Settings"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Style="{StaticResource SecondaryButton}"
+                        HorizontalAlignment="Stretch"
+                        Margin="0,0,0,{StaticResource SpacingS}"
+                        Tag="About"
+                        Click="OnNavButtonClick">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="ℹ️" Margin="0,0,12,0"/>
+                        <TextBlock Text="About"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Border>
+
+        <!-- Main Content Area -->
+        <Border Grid.Column="1" 
+                Background="{StaticResource BackgroundBrush}"
+                Padding="{StaticResource SpacingXL}">
+            <ContentControl x:Name="ContentArea"/>
+        </Border>
+    </Grid>
+</Window>

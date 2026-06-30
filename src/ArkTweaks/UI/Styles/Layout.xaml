@@ -1,0 +1,22 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:System="clr-namespace:System;assembly=mscorlib">
+
+    <!-- Spacing -->
+    <System:Double x:Key="SpacingXS">4</System:Double>
+    <System:Double x:Key="SpacingS">8</System:Double>
+    <System:Double x:Key="SpacingM">12</System:Double>
+    <System:Double x:Key="SpacingL">16</System:Double>
+    <System:Double x:Key="SpacingXL">24</System:Double>
+    <System:Double x:Key="SpacingXXL">32</System:Double>
+
+    <!-- Border Radius -->
+    <CornerRadius x:Key="CornerRadiusSmall">4</CornerRadius>
+    <CornerRadius x:Key="CornerRadiusMedium">8</CornerRadius>
+    <CornerRadius x:Key="CornerRadiusLarge">12</CornerRadius>
+    <CornerRadius x:Key="CornerRadiusXLarge">16</CornerRadius>
+
+    <!-- Sidebar Width -->
+    <System:Double x:Key="SidebarWidth">240</System:Double>
+
+</ResourceDictionary>
