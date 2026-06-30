@@ -3,11 +3,13 @@ using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using ArkTweaks.Services;
+using ArkTweaks.Core;
 using ArkTweaks.Core.Safety;
 using ArkTweaks.Core.Logging;
 using ArkTweaks.Core.Restore;
 using ArkTweaks.Core.Engine;
 using ArkTweaks.Core.Tweaks;
+using ArkTweaks.Core.Registry;
 using ArkTweaks.UI.Navigation;
 using ArkTweaks.UI.ViewModels;
 using ArkTweaks.Tweaks.Storage;
@@ -65,6 +67,19 @@ public partial class App : Application
         services.AddSingleton<ActionLogger>();
         services.AddSingleton<BackupService>();
         services.AddSingleton<OptimizationEngine>();
+
+        // Registry Framework Services
+        services.AddSingleton<RegistryService>();
+        services.AddSingleton<RegistryBackupService>();
+        services.AddSingleton<RegistryRestoreService>();
+
+        // System Scanner & Health Services
+        services.AddSingleton<SystemScannerService>();
+        services.AddSingleton<RecommendationEngine>();
+        services.AddSingleton<HealthScoreService>();
+
+        // Settings Service
+        services.AddSingleton<SettingsService>();
 
         // Navigation
         services.AddSingleton<NavigationService>();

@@ -23,7 +23,7 @@ public class BackupService
     {
         try
         {
-            using var key = Registry.LocalMachine.OpenSubKey(registryKeyPath);
+            using var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(registryKeyPath);
             if (key == null)
             {
                 _logger.LogWarning("Registry key not found for backup: {Key}", registryKeyPath);

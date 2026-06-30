@@ -1,10 +1,15 @@
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using ArkTweaks.Services;
+using ArkTweaks.Core;
+using ArkTweaks.Core.Engine;
+using ArkTweaks.Core.Logging;
+using ArkTweaks.Models;
 
 namespace ArkTweaks.UI.ViewModels;
 
@@ -13,6 +18,11 @@ public class DashboardViewModel : BaseViewModel
     private readonly SystemInfoService _systemInfoService;
     private readonly StartupService _startupService;
     private readonly PowerPlanService _powerPlanService;
+    private readonly SystemScannerService _systemScannerService;
+    private readonly RecommendationEngine _recommendationEngine;
+    private readonly HealthScoreService _healthScoreService;
+    private readonly OptimizationEngine _optimizationEngine;
+    private readonly ActionLogger _actionLogger;
     private string _cpuUsage = "0%";
     private string _ramUsage = "0%";
     private string _storageUsage = "0%";
@@ -20,6 +30,16 @@ public class DashboardViewModel : BaseViewModel
     private string _windowsVersion = "Unknown";
     private string _currentPowerPlan = "Balanced";
     private int _startupAppCount = 0;
+    private bool _isScanning;
+    private HealthScore _healthScore = new();
+    private SystemScanResult _scanResult = new();
+
+    // Modern Card Data
+    private string _cpuName = "Unknown";
+    private string _gpuName = "Unknown";
+    private double _ramInstalledGB = 0;
+    private double _freeDiskSpaceGB = 0;
+    private double _windowsUptimeHours = 0;
 
     public string CpuUsage
     {
@@ -63,17 +83,76 @@ public class DashboardViewModel : BaseViewModel
         set => SetProperty(ref _startupAppCount, value);
     }
 
+    public bool IsScanning
+    {
+        get => _isScanning;
+        set => SetProperty(ref _isScanning, value);
+    }
+
+    public HealthScore HealthScore
+    {
+        get => _healthScore;
+        set => SetProperty(ref _healthScore, value);
+    }
+
+    // Modern Card Properties
+    public string CpuName
+    {
+        get => _cpuName;
+        set => SetProperty(ref _cpuName, value);
+    }
+
+    public string GpuName
+    {
+        get => _gpuName;
+        set => SetProperty(ref _gpuName, value);
+    }
+
+    public double RamInstalledGB
+    {
+        get => _ramInstalledGB;
+        set => SetProperty(ref _ramInstalledGB, value);
+    }
+
+    public double FreeDiskSpaceGB
+    {
+        get => _freeDiskSpaceGB;
+        set => SetProperty(ref _freeDiskSpaceGB, value);
+    }
+
+    public double WindowsUptimeHours
+    {
+        get => _windowsUptimeHours;
+        set => SetProperty(ref _windowsUptimeHours, value);
+    }
+
+    // Collections
+    public ObservableCollection<RecentActivityItem> RecentActivities { get; } = new();
+    public ObservableCollection<Recommendation> Recommendations { get; } = new();
+
     public DashboardViewModel(
         ILogger<DashboardViewModel> logger,
         SystemInfoService systemInfoService,
         StartupService startupService,
-        PowerPlanService powerPlanService) 
+        PowerPlanService powerPlanService,
+        SystemScannerService systemScannerService,
+        RecommendationEngine recommendationEngine,
+        HealthScoreService healthScoreService,
+        OptimizationEngine optimizationEngine,
+        ActionLogger actionLogger) 
         : base(logger)
     {
         _systemInfoService = systemInfoService;
         _startupService = startupService;
         _powerPlanService = powerPlanService;
+        _systemScannerService = systemScannerService;
+        _recommendationEngine = recommendationEngine;
+        _healthScoreService = healthScoreService;
+        _optimizationEngine = optimizationEngine;
+        _actionLogger = actionLogger;
+        
         LoadSystemInfo();
+        LoadRecentActivities();
         StartPeriodicRefresh();
     }
 
@@ -100,12 +179,145 @@ public class DashboardViewModel : BaseViewModel
         }
     }
 
+    private void LoadRecentActivities()
+    {
+        try
+        {
+            // Load recent activities from action logger
+            // This is a simplified implementation
+            RecentActivities.Clear();
+            
+            // Add sample data for now
+            RecentActivities.Add(new RecentActivityItem
+            {
+                Timestamp = DateTime.Now.AddMinutes(-5),
+                Action = "System Scan",
+                Success = true
+            });
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Failed to load recent activities");
+        }
+    }
+
+    public Task PerformFullScanAsync()
+    {
+        return Task.Run(() =>
+        {
+            IsScanning = true;
+            try
+            {
+                _scanResult = _systemScannerService.ScanSystem();
+                
+                // Update modern card data
+                CpuName = _scanResult.CpuName;
+                GpuName = _scanResult.GpuName;
+                RamInstalledGB = _scanResult.RamInstalledGB;
+                FreeDiskSpaceGB = _scanResult.FreeDiskSpaceGB;
+                WindowsUptimeHours = _scanResult.WindowsUptimeHours;
+                
+                // Calculate health score
+                HealthScore = _healthScoreService.CalculateHealthScore(_scanResult);
+                OptimizationScore = HealthScore.OverallScore.ToString();
+                
+                // Generate recommendations
+                var recommendations = _recommendationEngine.GenerateRecommendations(_scanResult);
+                Recommendations.Clear();
+                foreach (var rec in recommendations)
+                {
+                    Recommendations.Add(rec);
+                }
+                
+                Logger.LogInformation("Full scan completed");
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex, "Error during full scan");
+            }
+            finally
+            {
+                IsScanning = false;
+            }
+        });
+    }
+
+    public async Task QuickOptimizeAsync()
+    {
+        try
+        {
+            // Run safe optimizations
+            await _optimizationEngine.ExecuteTweakAsync("cleanup_temp_files");
+            await _optimizationEngine.ExecuteTweakAsync("restore_create_point");
+            
+            Logger.LogInformation("Quick optimization completed");
+            await PerformFullScanAsync();
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Error during quick optimization");
+        }
+    }
+
+    public async Task QuickCleanAsync()
+    {
+        try
+        {
+            await _optimizationEngine.ExecuteTweakAsync("cleanup_temp_files");
+            await _optimizationEngine.ExecuteTweakAsync("cleanup_recycle_bin");
+            
+            Logger.LogInformation("Quick clean completed");
+            await PerformFullScanAsync();
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Error during quick clean");
+        }
+    }
+
+    public async Task CreateRestorePointAsync()
+    {
+        try
+        {
+            await _optimizationEngine.ExecuteTweakAsync("restore_create_point");
+            Logger.LogInformation("Restore point created");
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Error creating restore point");
+        }
+    }
+
+    public async Task ApplyRecommendationAsync(Recommendation recommendation)
+    {
+        try
+        {
+            var result = await _optimizationEngine.ExecuteTweakAsync(recommendation.SuggestedAction);
+            if (result.Success)
+            {
+                recommendation.IsApplied = true;
+                Logger.LogInformation("Applied recommendation: {Title}", recommendation.Title);
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Error applying recommendation: {Title}", recommendation.Title);
+        }
+    }
+
     private async void StartPeriodicRefresh()
     {
         while (true)
         {
-            await Task.Delay(5000); // Refresh every 5 seconds
+            await Task.Delay(30000); // Refresh every 30 seconds
             LoadSystemInfo();
         }
     }
+}
+
+public class RecentActivityItem
+{
+    public DateTime Timestamp { get; set; }
+    public string Action { get; set; } = string.Empty;
+    public bool Success { get; set; }
 }
