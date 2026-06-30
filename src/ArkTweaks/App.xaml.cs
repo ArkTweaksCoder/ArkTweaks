@@ -28,18 +28,9 @@ public partial class App : Application
             var licenseService = ServiceProvider.GetRequiredService<LicenseService>();
             licenseService.Initialize();
 
-            // Create and show main window
-            var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
-            mainWindow.Show();
-            
-            // Keep application running
-            ShutdownMode = ShutdownMode.OnMainWindowClose;
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show($"Error starting application: {ex.Message}\n\n{ex.StackTrace}", "Startup Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            Shutdown();
-        }
+        // Create and show main window
+        var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
+        mainWindow.Show();
     }
 
     private void ConfigureServices(IServiceCollection services)
